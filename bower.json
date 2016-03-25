@@ -1,14 +1,11 @@
 {
   "name": "purescript-coproducts",
-  "homepage": "https://github.com/purescript/purescript-coproducts",
+  "homepage": "https://github.com/purescript/purescript-functor-coproducts",
   "description": "Functor coproducts",
-  "keywords": [
-    "purescript"
-  ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/purescript/purescript-coproducts.git"
+    "url": "git://github.com/purescript/purescript-functor-coproducts.git"
   },
   "ignore": [
     "**/.*",
@@ -17,10 +14,9 @@
     "output",
     "test",
     "bower.json",
-    "gulpfile.js",
     "package.json"
   ],
   "dependencies": {
-    "purescript-either": "^0.2.0"
+    "purescript-either": "^1.0.0-rc.1"
   }
 }
