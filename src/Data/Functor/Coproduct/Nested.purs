@@ -1,7 +1,5 @@
 module Data.Functor.Coproduct.Nested where
 
-import Prelude
-
 import Data.Functor.Coproduct (Coproduct, coproduct, left, right)
 
 type Coproduct2 = Coproduct
