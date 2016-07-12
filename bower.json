@@ -1,5 +1,5 @@
 {
-  "name": "purescript-coproducts",
+  "name": "purescript-functor-coproducts",
   "homepage": "https://github.com/purescript/purescript-functor-coproducts",
   "description": "Functor coproducts",
   "license": "MIT",
