@@ -27,7 +27,7 @@ coproduct :: forall f g a b. (f a -> b) -> (g a -> b) -> Coproduct f g a -> b
 coproduct f g = either f g <<< unCoproduct
 
 instance functorCoproduct :: (Functor f, Functor g) => Functor (Coproduct f g) where
-  map f = Coproduct <<< coproduct (Left <<< (<$>) f) (Right <<< (<$>) f)
+  map f = Coproduct <<< coproduct (Left <<< map f) (Right <<< map f)
 
 instance foldableCoproduct :: (Foldable f, Foldable g) => Foldable (Coproduct f g) where
   foldr f z = coproduct (foldr f z) (foldr f z)
@@ -36,8 +36,8 @@ instance foldableCoproduct :: (Foldable f, Foldable g) => Foldable (Coproduct f 
 
 instance traversableCoproduct :: (Traversable f, Traversable g) => Traversable (Coproduct f g) where
   traverse f = coproduct
-    ((<$>) (Coproduct <<< Left) <<< traverse f)
-    ((<$>) (Coproduct <<< Right) <<< traverse f)
+    (map (Coproduct <<< Left) <<< traverse f)
+    (map (Coproduct <<< Right) <<< traverse f)
   sequence = coproduct
-    ((<$>) (Coproduct <<< Left) <<< sequence)
-    ((<$>) (Coproduct <<< Right) <<< sequence)
+    (map (Coproduct <<< Left) <<< sequence)
+    (map (Coproduct <<< Right) <<< sequence)
