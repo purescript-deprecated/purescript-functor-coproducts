@@ -27,6 +27,15 @@ right ga = Coproduct (Right ga)
 coproduct :: forall f g a b. (f a -> b) -> (g a -> b) -> Coproduct f g a -> b
 coproduct f g (Coproduct e) = either f g e
 
+-- | Change the underlying functors in a coproduct
+bihoistCoproduct
+  :: forall f g h i
+   . (f ~> h)
+  -> (g ~> i)
+  -> Coproduct f g
+  ~> Coproduct h i
+bihoistCoproduct natF natG (Coproduct e) = Coproduct (bimap natF natG e)
+
 instance functorCoproduct :: (Functor f, Functor g) => Functor (Coproduct f g) where
   map f (Coproduct e) = Coproduct (bimap (map f) (map f) e)
 
