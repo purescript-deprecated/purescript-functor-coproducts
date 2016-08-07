@@ -2,6 +2,7 @@ module Data.Functor.Coproduct where
 
 import Prelude
 
+import Data.Bifunctor (bimap)
 import Data.Either (Either(..), either)
 import Data.Foldable (class Foldable, foldMap, foldl, foldr)
 import Data.Traversable (class Traversable, traverse, sequence)
@@ -15,19 +16,28 @@ unCoproduct (Coproduct x) = x
 
 -- | Left injection
 left :: forall f g a. f a -> Coproduct f g a
-left = Coproduct <<< Left
+left fa = Coproduct (Left fa)
 
 -- | Right injection
 right :: forall f g a. g a -> Coproduct f g a
-right = Coproduct <<< Right
+right ga = Coproduct (Right ga)
 
 -- | Eliminate a coproduct by providing eliminators for the left and
 -- | right components
 coproduct :: forall f g a b. (f a -> b) -> (g a -> b) -> Coproduct f g a -> b
-coproduct f g = either f g <<< unCoproduct
+coproduct f g (Coproduct e) = either f g e
+
+-- | Change the underlying functors in a coproduct
+bihoistCoproduct
+  :: forall f g h i
+   . (f ~> h)
+  -> (g ~> i)
+  -> Coproduct f g
+  ~> Coproduct h i
+bihoistCoproduct natF natG (Coproduct e) = Coproduct (bimap natF natG e)
 
 instance functorCoproduct :: (Functor f, Functor g) => Functor (Coproduct f g) where
-  map f = Coproduct <<< coproduct (Left <<< (<$>) f) (Right <<< (<$>) f)
+  map f (Coproduct e) = Coproduct (bimap (map f) (map f) e)
 
 instance foldableCoproduct :: (Foldable f, Foldable g) => Foldable (Coproduct f g) where
   foldr f z = coproduct (foldr f z) (foldr f z)
@@ -36,8 +46,8 @@ instance foldableCoproduct :: (Foldable f, Foldable g) => Foldable (Coproduct f 
 
 instance traversableCoproduct :: (Traversable f, Traversable g) => Traversable (Coproduct f g) where
   traverse f = coproduct
-    ((<$>) (Coproduct <<< Left) <<< traverse f)
-    ((<$>) (Coproduct <<< Right) <<< traverse f)
+    (map (Coproduct <<< Left) <<< traverse f)
+    (map (Coproduct <<< Right) <<< traverse f)
   sequence = coproduct
-    ((<$>) (Coproduct <<< Left) <<< sequence)
-    ((<$>) (Coproduct <<< Right) <<< sequence)
+    (map (Coproduct <<< Left) <<< sequence)
+    (map (Coproduct <<< Right) <<< sequence)
