@@ -2,6 +2,7 @@ module Data.Functor.Coproduct where
 
 import Prelude
 
+import Data.Bifunctor (bimap)
 import Data.Either (Either(..), either)
 import Data.Foldable (class Foldable, foldMap, foldl, foldr)
 import Data.Traversable (class Traversable, traverse, sequence)
@@ -15,19 +16,19 @@ unCoproduct (Coproduct x) = x
 
 -- | Left injection
 left :: forall f g a. f a -> Coproduct f g a
-left = Coproduct <<< Left
+left fa = Coproduct (Left fa)
 
 -- | Right injection
 right :: forall f g a. g a -> Coproduct f g a
-right = Coproduct <<< Right
+right ga = Coproduct (Right ga)
 
 -- | Eliminate a coproduct by providing eliminators for the left and
 -- | right components
 coproduct :: forall f g a b. (f a -> b) -> (g a -> b) -> Coproduct f g a -> b
-coproduct f g = either f g <<< unCoproduct
+coproduct f g (Coproduct e) = either f g e
 
 instance functorCoproduct :: (Functor f, Functor g) => Functor (Coproduct f g) where
-  map f = Coproduct <<< coproduct (Left <<< map f) (Right <<< map f)
+  map f (Coproduct e) = Coproduct (bimap (map f) (map f) e)
 
 instance foldableCoproduct :: (Foldable f, Foldable g) => Foldable (Coproduct f g) where
   foldr f z = coproduct (foldr f z) (foldr f z)
