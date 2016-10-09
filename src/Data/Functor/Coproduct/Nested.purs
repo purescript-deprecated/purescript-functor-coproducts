@@ -1,211 +1,257 @@
-module Data.Functor.Coproduct.Nested where
-
-import Data.Functor.Coproduct (Coproduct, coproduct, left, right)
-
-type Coproduct2 = Coproduct
-type Coproduct3 a b = Coproduct (Coproduct2 a b)
-type Coproduct4 a b c = Coproduct (Coproduct3 a b c)
-type Coproduct5 a b c d = Coproduct (Coproduct4 a b c d)
-type Coproduct6 a b c d e = Coproduct (Coproduct5 a b c d e)
-type Coproduct7 a b c d e f = Coproduct (Coproduct6 a b c d e f)
-type Coproduct8 a b c d e f g = Coproduct (Coproduct7 a b c d e f g)
-type Coproduct9 a b c d e f g h = Coproduct (Coproduct8 a b c d e f g h)
-type Coproduct10 a b c d e f g h i = Coproduct (Coproduct9 a b c d e f g h i)
-
--- Coproduct2
-coproduct1of2 :: forall a b x. a x -> Coproduct2 a b x
-coproduct1of2 = left
-
-coproduct2of2 :: forall a b x. b x -> Coproduct2 a b x
-coproduct2of2 = right
-
--- Coproduct3
-coproduct1of3 :: forall a b c x. a x -> Coproduct3 a b c x
-coproduct1of3 v = (left (left v))
-
-coproduct2of3 :: forall a b c x. b x -> Coproduct3 a b c x
-coproduct2of3 v = (left (right v))
-
-coproduct3of3 :: forall a b c x. c x -> Coproduct3 a b c x
-coproduct3of3 v = right v
-
--- Coproduct4
-coproduct1of4 :: forall a b c d x. a x -> Coproduct4 a b c d x
-coproduct1of4 v = (left (left (left v)))
-
-coproduct2of4 :: forall a b c d x. b x -> Coproduct4 a b c d x
-coproduct2of4 v = (left (left (right v)))
-
-coproduct3of4 :: forall a b c d x. c x -> Coproduct4 a b c d x
-coproduct3of4 v = (left (right v))
-
-coproduct4of4 :: forall a b c d x. d x -> Coproduct4 a b c d x
-coproduct4of4 v = right v
-
--- Coproduct5
-coproduct1of5 :: forall a b c d e x. a x -> Coproduct5 a b c d e x
-coproduct1of5 v = (left (left (left (left v))))
-
-coproduct2of5 :: forall a b c d e x. b x -> Coproduct5 a b c d e x
-coproduct2of5 v = (left (left (left (right v))))
-
-coproduct3of5 :: forall a b c d e x. c x -> Coproduct5 a b c d e x
-coproduct3of5 v = (left (left (right v)))
-
-coproduct4of5 :: forall a b c d e x. d x -> Coproduct5 a b c d e x
-coproduct4of5 v = (left (right v))
-
-coproduct5of5 :: forall a b c d e x. e x -> Coproduct5 a b c d e x
-coproduct5of5 v = right v
-
--- Coproduct6
-coproduct1of6 :: forall a b c d e f x. a x -> Coproduct6 a b c d e f x
-coproduct1of6 v = (left (left (left (left (left v)))))
-
-coproduct2of6 :: forall a b c d e f x. b x -> Coproduct6 a b c d e f x
-coproduct2of6 v = (left (left (left (left (right v)))))
-
-coproduct3of6 :: forall a b c d e f x. c x -> Coproduct6 a b c d e f x
-coproduct3of6 v = (left (left (left (right v))))
-
-coproduct4of6 :: forall a b c d e f x. d x -> Coproduct6 a b c d e f x
-coproduct4of6 v = (left (left (right v)))
-
-coproduct5of6 :: forall a b c d e f x. e x -> Coproduct6 a b c d e f x
-coproduct5of6 v = (left (right v))
-
-coproduct6of6 :: forall a b c d e f x. f x -> Coproduct6 a b c d e f x
-coproduct6of6 v = right v
-
--- Coproduct7
-coproduct1of7 :: forall a b c d e f g x. a x -> Coproduct7 a b c d e f g x
-coproduct1of7 v = (left (left (left (left (left (left v))))))
-
-coproduct2of7 :: forall a b c d e f g x. b x -> Coproduct7 a b c d e f g x
-coproduct2of7 v = (left (left (left (left (left (right v))))))
-
-coproduct3of7 :: forall a b c d e f g x. c x -> Coproduct7 a b c d e f g x
-coproduct3of7 v = (left (left (left (left (right v)))))
-
-coproduct4of7 :: forall a b c d e f g x. d x -> Coproduct7 a b c d e f g x
-coproduct4of7 v = (left (left (left (right v))))
-
-coproduct5of7 :: forall a b c d e f g x. e x -> Coproduct7 a b c d e f g x
-coproduct5of7 v = (left (left (right v)))
-
-coproduct6of7 :: forall a b c d e f g x. f x -> Coproduct7 a b c d e f g x
-coproduct6of7 v = (left (right v))
-
-coproduct7of7 :: forall a b c d e f g x. g x -> Coproduct7 a b c d e f g x
-coproduct7of7 v = right v
-
--- Coproduct8
-coproduct1of8 :: forall a b c d e f g h x. a x -> Coproduct8 a b c d e f g h x
-coproduct1of8 v = (left (left (left (left (left (left (left v)))))))
-
-coproduct2of8 :: forall a b c d e f g h x. b x -> Coproduct8 a b c d e f g h x
-coproduct2of8 v = (left (left (left (left (left (left (right v)))))))
-
-coproduct3of8 :: forall a b c d e f g h x. c x -> Coproduct8 a b c d e f g h x
-coproduct3of8 v = (left (left (left (left (left (right v))))))
-
-coproduct4of8 :: forall a b c d e f g h x. d x -> Coproduct8 a b c d e f g h x
-coproduct4of8 v = (left (left (left (left (right v)))))
-
-coproduct5of8 :: forall a b c d e f g h x. e x -> Coproduct8 a b c d e f g h x
-coproduct5of8 v = (left (left (left (right v))))
-
-coproduct6of8 :: forall a b c d e f g h x. f x -> Coproduct8 a b c d e f g h x
-coproduct6of8 v = (left (left (right v)))
-
-coproduct7of8 :: forall a b c d e f g h x. g x -> Coproduct8 a b c d e f g h x
-coproduct7of8 v = (left (right v))
-
-coproduct8of8 :: forall a b c d e f g h x. h x -> Coproduct8 a b c d e f g h x
-coproduct8of8 v = right v
-
--- Coproduct9
-coproduct1of9 :: forall a b c d e f g h i x. a x -> Coproduct9 a b c d e f g h i x
-coproduct1of9 v = (left (left (left (left (left (left (left (left v))))))))
-
-coproduct2of9 :: forall a b c d e f g h i x. b x -> Coproduct9 a b c d e f g h i x
-coproduct2of9 v = (left (left (left (left (left (left (left (right v))))))))
-
-coproduct3of9 :: forall a b c d e f g h i x. c x -> Coproduct9 a b c d e f g h i x
-coproduct3of9 v = (left (left (left (left (left (left (right v)))))))
-
-coproduct4of9 :: forall a b c d e f g h i x. d x -> Coproduct9 a b c d e f g h i x
-coproduct4of9 v = (left (left (left (left (left (right v))))))
-
-coproduct5of9 :: forall a b c d e f g h i x. e x -> Coproduct9 a b c d e f g h i x
-coproduct5of9 v = (left (left (left (left (right v)))))
-
-coproduct6of9 :: forall a b c d e f g h i x. f x -> Coproduct9 a b c d e f g h i x
-coproduct6of9 v = (left (left (left (right v))))
-
-coproduct7of9 :: forall a b c d e f g h i x. g x -> Coproduct9 a b c d e f g h i x
-coproduct7of9 v = (left (left (right v)))
-
-coproduct8of9 :: forall a b c d e f g h i x. h x -> Coproduct9 a b c d e f g h i x
-coproduct8of9 v = (left (right v))
-
-coproduct9of9 :: forall a b c d e f g h i x. i x -> Coproduct9 a b c d e f g h i x
-coproduct9of9 v = right v
-
--- Coproduct10
-coproduct1of10 :: forall a b c d e f g h i j x. a x -> Coproduct10 a b c d e f g h i j x
-coproduct1of10 v = (left (left (left (left (left (left (left (left (left v)))))))))
-
-coproduct2of10 :: forall a b c d e f g h i j x. b x -> Coproduct10 a b c d e f g h i j x
-coproduct2of10 v = (left (left (left (left (left (left (left (left (right v)))))))))
-
-coproduct3of10 :: forall a b c d e f g h i j x. c x -> Coproduct10 a b c d e f g h i j x
-coproduct3of10 v = (left (left (left (left (left (left (left (right v))))))))
-
-coproduct4of10 :: forall a b c d e f g h i j x. d x -> Coproduct10 a b c d e f g h i j x
-coproduct4of10 v = (left (left (left (left (left (left (right v)))))))
-
-coproduct5of10 :: forall a b c d e f g h i j x. e x -> Coproduct10 a b c d e f g h i j x
-coproduct5of10 v = (left (left (left (left (left (right v))))))
-
-coproduct6of10 :: forall a b c d e f g h i j x. f x -> Coproduct10 a b c d e f g h i j x
-coproduct6of10 v = (left (left (left (left (right v)))))
-
-coproduct7of10 :: forall a b c d e f g h i j x. g x -> Coproduct10 a b c d e f g h i j x
-coproduct7of10 v = (left (left (left (right v))))
-
-coproduct8of10 :: forall a b c d e f g h i j x. h x -> Coproduct10 a b c d e f g h i j x
-coproduct8of10 v = (left (left (right v)))
-
-coproduct9of10 :: forall a b c d e f g h i j x. i x -> Coproduct10 a b c d e f g h i j x
-coproduct9of10 v = (left (right v))
-
-coproduct10of10 :: forall a b c d e f g h i j x. j x -> Coproduct10 a b c d e f g h i j x
-coproduct10of10 v = right v
-
-coproduct2 :: forall a b z x. (a x -> z) -> (b x -> z) -> Coproduct2 a b x -> z
-coproduct2 = coproduct
-
-coproduct3 :: forall a b c z x. (a x -> z) -> (b x -> z) -> (c x -> z) -> Coproduct3 a b c x -> z
-coproduct3 a b z = coproduct (coproduct2 a b) z
-
-coproduct4 :: forall a b c d z x. (a x -> z) -> (b x -> z) -> (c x -> z) -> (d x -> z) -> Coproduct4 a b c d x -> z
-coproduct4 a b c z = coproduct (coproduct3 a b c) z
-
-coproduct5 :: forall a b c d e z x. (a x -> z) -> (b x -> z) -> (c x -> z) -> (d x -> z) -> (e x -> z) -> Coproduct5 a b c d e x -> z
-coproduct5 a b c d z = coproduct (coproduct4 a b c d) z
-
-coproduct6 :: forall a b c d e f z x. (a x -> z) -> (b x -> z) -> (c x -> z) -> (d x -> z) -> (e x -> z) -> (f x -> z) -> Coproduct6 a b c d e f x -> z
-coproduct6 a b c d e z = coproduct (coproduct5 a b c d e) z
-
-coproduct7 :: forall a b c d e f g z x. (a x -> z) -> (b x -> z) -> (c x -> z) -> (d x -> z) -> (e x -> z) -> (f x -> z) -> (g x -> z) -> Coproduct7 a b c d e f g x -> z
-coproduct7 a b c d e f z = coproduct (coproduct6 a b c d e f) z
-
-coproduct8 :: forall a b c d e f g h z x. (a x -> z) -> (b x -> z) -> (c x -> z) -> (d x -> z) -> (e x -> z) -> (f x -> z) -> (g x -> z) -> (h x -> z) -> Coproduct8 a b c d e f g h x -> z
-coproduct8 a b c d e f g z = coproduct (coproduct7 a b c d e f g) z
-
-coproduct9 :: forall a b c d e f g h i z x. (a x -> z) -> (b x -> z) -> (c x -> z) -> (d x -> z) -> (e x -> z) -> (f x -> z) -> (g x -> z) -> (h x -> z) -> (i x -> z) -> Coproduct9 a b c d e f g h i x -> z
-coproduct9 a b c d e f g h z = coproduct (coproduct8 a b c d e f g h) z
-
-coproduct10 :: forall a b c d e f g h i j z x. (a x -> z) -> (b x -> z) -> (c x -> z) -> (d x -> z) -> (e x -> z) -> (f x -> z) -> (g x -> z) -> (h x -> z) -> (i x -> z) -> (j x -> z) -> Coproduct10 a b c d e f g h i j x -> z
-coproduct10 a b c d e f g h i z = coproduct (coproduct9 a b c d e f g h i) z
+module Data.Functor.Coproduct.Nested
+  ( in1, in2, in3, in4, in5, in6, in7, in8, in9, in10
+  , at1, at2, at3, at4, at5, at6, at7, at8, at9, at10
+  , Coproduct1, Coproduct2, Coproduct3, Coproduct4, Coproduct5, Coproduct6, Coproduct7, Coproduct8, Coproduct9, Coproduct10
+  , either1, either2, either3, either4, either5, either6, either7, either8, either9, either10
+  , C2, C3, C4, C5, C6, C7, C8, C9, C10, C11
+  )
+   where
+
+import Prelude
+
+import Data.Const (Const)
+import Data.Either (Either(..))
+import Data.Functor.Coproduct (Coproduct(..), left, right)
+import Data.Newtype (unwrap)
+
+type Coproduct1 a = C2 a (Const Void)
+type Coproduct2 a b = C3 a b (Const Void)
+type Coproduct3 a b c = C4 a b c (Const Void)
+type Coproduct4 a b c d = C5 a b c d (Const Void)
+type Coproduct5 a b c d e = C6 a b c d e (Const Void)
+type Coproduct6 a b c d e f = C7 a b c d e f (Const Void)
+type Coproduct7 a b c d e f g = C8 a b c d e f g (Const Void)
+type Coproduct8 a b c d e f g h = C9 a b c d e f g h (Const Void)
+type Coproduct9 a b c d e f g h i = C10 a b c d e f g h i (Const Void)
+type Coproduct10 a b c d e f g h i j = C11 a b c d e f g h i j (Const Void)
+
+type C2 a z = Coproduct a z
+type C3 a b z = Coproduct a (C2 b z)
+type C4 a b c z = Coproduct a (C3 b c z)
+type C5 a b c d z = Coproduct a (C4 b c d z)
+type C6 a b c d e z = Coproduct a (C5 b c d e z)
+type C7 a b c d e f z = Coproduct a (C6 b c d e f z)
+type C8 a b c d e f g z = Coproduct a (C7 b c d e f g z)
+type C9 a b c d e f g h z = Coproduct a (C8 b c d e f g h z)
+type C10 a b c d e f g h i z = Coproduct a (C9 b c d e f g h i z)
+type C11 a b c d e f g h i j z = Coproduct a (C10 b c d e f g h i j z)
+
+in1 :: forall a z. a ~> C2 a z
+in1 = left
+
+in2 :: forall a b z. b ~> C3 a b z
+in2 v = right (left v)
+
+in3 :: forall a b c z. c ~> C4 a b c z
+in3 v = right (right (left v))
+
+in4 :: forall a b c d z. d ~> C5 a b c d z
+in4 v = right (right (right (left v)))
+
+in5 :: forall a b c d e z. e ~> C6 a b c d e z
+in5 v = right (right (right (right (left v))))
+
+in6 :: forall a b c d e f z. f ~> C7 a b c d e f z
+in6 v = right (right (right (right (right (left v)))))
+
+in7 :: forall a b c d e f g z. g ~> C8 a b c d e f g z
+in7 v = right (right (right (right (right (right (left v))))))
+
+in8 :: forall a b c d e f g h z. h ~> C9 a b c d e f g h z
+in8 v = right (right (right (right (right (right (right (left v)))))))
+
+in9 :: forall a b c d e f g h i z. i ~> C10 a b c d e f g h i z
+in9 v = right (right (right (right (right (right (right (right (left v))))))))
+
+in10 :: forall a b c d e f g h i j z. j ~> C11 a b c d e f g h i j z
+in10 v = right (right (right (right (right (right (right (right (right (left v)))))))))
+
+at1 :: forall r x a z. r -> (a x -> r) -> C2 a z x -> r
+at1 b f y = case y of
+  Coproduct (Left r) -> f r
+  _ -> b
+
+at2 :: forall r x a b z. r -> (b x -> r) -> C3 a b z x -> r
+at2 b f y = case y of
+  Coproduct (Right (Coproduct (Left r))) -> f r
+  _ -> b
+
+at3 :: forall r x a b c z. r -> (c x -> r) -> C4 a b c z x -> r
+at3 b f y = case y of
+  Coproduct (Right (Coproduct (Right (Coproduct (Left r))))) -> f r
+  _ -> b
+
+at4 :: forall r x a b c d z. r -> (d x -> r) -> C5 a b c d z x -> r
+at4 b f y = case y of
+  Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Left r))))))) -> f r
+  _ -> b
+
+at5 :: forall r x a b c d e z. r -> (e x -> r) -> C6 a b c d e z x -> r
+at5 b f y = case y of
+  Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Left r))))))))) -> f r
+  _ -> b
+
+at6 :: forall r x a b c d e f z. r -> (f x -> r) -> C7 a b c d e f z x -> r
+at6 b f y = case y of
+  Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Left r))))))))))) -> f r
+  _ -> b
+
+at7 :: forall r x a b c d e f g z. r -> (g x -> r) -> C8 a b c d e f g z x -> r
+at7 b f y = case y of
+  Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Left r))))))))))))) -> f r
+  _ -> b
+
+at8 :: forall r x a b c d e f g h z. r -> (h x -> r) -> C9 a b c d e f g h z x -> r
+at8 b f y = case y of
+  Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Left r))))))))))))))) -> f r
+  _ -> b
+
+at9 :: forall r x a b c d e f g h i z. r -> (i x -> r) -> C10 a b c d e f g h i z x -> r
+at9 b f y = case y of
+  Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Left r))))))))))))))))) -> f r
+  _ -> b
+
+at10 :: forall r x a b c d e f g h i j z. r -> (j x -> r) -> C11 a b c d e f g h i j z x -> r
+at10 b f y = case y of
+  Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Left r))))))))))))))))))) -> f r
+  _ -> b
+
+either1 :: forall a. Coproduct1 a ~> a
+either1 y = case y of
+  Coproduct (Left r) -> r
+  Coproduct (Right _1) -> absurd (unwrap _1)
+
+either2 :: forall r x a b. (a x -> r) -> (b x -> r) -> Coproduct2 a b x -> r
+either2 a b y = case y of
+  Coproduct (Left r) -> a r
+  Coproduct (Right _1) -> case _1 of
+    Coproduct (Left r) -> b r
+    Coproduct (Right _2) -> absurd (unwrap _2)
+
+either3 :: forall r x a b c. (a x -> r) -> (b x -> r) -> (c x -> r) -> Coproduct3 a b c x -> r
+either3 a b c y = case y of
+  Coproduct (Left r) -> a r
+  Coproduct (Right _1) -> case _1 of
+    Coproduct (Left r) -> b r
+    Coproduct (Right _2) -> case _2 of
+      Coproduct (Left r) -> c r
+      Coproduct (Right _3) -> absurd (unwrap _3)
+
+either4 :: forall r x a b c d. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> Coproduct4 a b c d x -> r
+either4 a b c d y = case y of
+  Coproduct (Left r) -> a r
+  Coproduct (Right _1) -> case _1 of
+    Coproduct (Left r) -> b r
+    Coproduct (Right _2) -> case _2 of
+      Coproduct (Left r) -> c r
+      Coproduct (Right _3) -> case _3 of
+        Coproduct (Left r) -> d r
+        Coproduct (Right _4) -> absurd (unwrap _4)
+
+either5 :: forall r x a b c d e. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> Coproduct5 a b c d e x -> r
+either5 a b c d e y = case y of
+  Coproduct (Left r) -> a r
+  Coproduct (Right _1) -> case _1 of
+    Coproduct (Left r) -> b r
+    Coproduct (Right _2) -> case _2 of
+      Coproduct (Left r) -> c r
+      Coproduct (Right _3) -> case _3 of
+        Coproduct (Left r) -> d r
+        Coproduct (Right _4) -> case _4 of
+          Coproduct (Left r) -> e r
+          Coproduct (Right _5) -> absurd (unwrap _5)
+
+either6 :: forall r x a b c d e f. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> Coproduct6 a b c d e f x -> r
+either6 a b c d e f y = case y of
+  Coproduct (Left r) -> a r
+  Coproduct (Right _1) -> case _1 of
+    Coproduct (Left r) -> b r
+    Coproduct (Right _2) -> case _2 of
+      Coproduct (Left r) -> c r
+      Coproduct (Right _3) -> case _3 of
+        Coproduct (Left r) -> d r
+        Coproduct (Right _4) -> case _4 of
+          Coproduct (Left r) -> e r
+          Coproduct (Right _5) -> case _5 of
+            Coproduct (Left r) -> f r
+            Coproduct (Right _6) -> absurd (unwrap _6)
+
+either7 :: forall r x a b c d e f g. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> (g x -> r) -> Coproduct7 a b c d e f g x -> r
+either7 a b c d e f g y = case y of
+  Coproduct (Left r) -> a r
+  Coproduct (Right _1) -> case _1 of
+    Coproduct (Left r) -> b r
+    Coproduct (Right _2) -> case _2 of
+      Coproduct (Left r) -> c r
+      Coproduct (Right _3) -> case _3 of
+        Coproduct (Left r) -> d r
+        Coproduct (Right _4) -> case _4 of
+          Coproduct (Left r) -> e r
+          Coproduct (Right _5) -> case _5 of
+            Coproduct (Left r) -> f r
+            Coproduct (Right _6) -> case _6 of
+              Coproduct (Left r) -> g r
+              Coproduct (Right _7) -> absurd (unwrap _7)
+
+either8 :: forall r x a b c d e f g h. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> (g x -> r) -> (h x -> r) -> Coproduct8 a b c d e f g h x -> r
+either8 a b c d e f g h y = case y of
+  Coproduct (Left r) -> a r
+  Coproduct (Right _1) -> case _1 of
+    Coproduct (Left r) -> b r
+    Coproduct (Right _2) -> case _2 of
+      Coproduct (Left r) -> c r
+      Coproduct (Right _3) -> case _3 of
+        Coproduct (Left r) -> d r
+        Coproduct (Right _4) -> case _4 of
+          Coproduct (Left r) -> e r
+          Coproduct (Right _5) -> case _5 of
+            Coproduct (Left r) -> f r
+            Coproduct (Right _6) -> case _6 of
+              Coproduct (Left r) -> g r
+              Coproduct (Right _7) -> case _7 of
+                Coproduct (Left r) -> h r
+                Coproduct (Right _8) -> absurd (unwrap _8)
+
+either9 :: forall r x a b c d e f g h i. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> (g x -> r) -> (h x -> r) -> (i x -> r) -> Coproduct9 a b c d e f g h i x -> r
+either9 a b c d e f g h i y = case y of
+  Coproduct (Left r) -> a r
+  Coproduct (Right _1) -> case _1 of
+    Coproduct (Left r) -> b r
+    Coproduct (Right _2) -> case _2 of
+      Coproduct (Left r) -> c r
+      Coproduct (Right _3) -> case _3 of
+        Coproduct (Left r) -> d r
+        Coproduct (Right _4) -> case _4 of
+          Coproduct (Left r) -> e r
+          Coproduct (Right _5) -> case _5 of
+            Coproduct (Left r) -> f r
+            Coproduct (Right _6) -> case _6 of
+              Coproduct (Left r) -> g r
+              Coproduct (Right _7) -> case _7 of
+                Coproduct (Left r) -> h r
+                Coproduct (Right _8) -> case _8 of
+                  Coproduct (Left r) -> i r
+                  Coproduct (Right _9) -> absurd (unwrap _9)
+
+either10 :: forall r x a b c d e f g h i j. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> (g x -> r) -> (h x -> r) -> (i x -> r) -> (j x -> r) -> Coproduct10 a b c d e f g h i j x -> r
+either10 a b c d e f g h i j y = case y of
+  Coproduct (Left r) -> a r
+  Coproduct (Right _1) -> case _1 of
+    Coproduct (Left r) -> b r
+    Coproduct (Right _2) -> case _2 of
+      Coproduct (Left r) -> c r
+      Coproduct (Right _3) -> case _3 of
+        Coproduct (Left r) -> d r
+        Coproduct (Right _4) -> case _4 of
+          Coproduct (Left r) -> e r
+          Coproduct (Right _5) -> case _5 of
+            Coproduct (Left r) -> f r
+            Coproduct (Right _6) -> case _6 of
+              Coproduct (Left r) -> g r
+              Coproduct (Right _7) -> case _7 of
+                Coproduct (Left r) -> h r
+                Coproduct (Right _8) -> case _8 of
+                  Coproduct (Left r) -> i r
+                  Coproduct (Right _9) -> case _9 of
+                    Coproduct (Left r) -> j r
+                    Coproduct (Right _10) -> absurd (unwrap _10)
