@@ -2,7 +2,7 @@ module Data.Functor.Coproduct.Nested
   ( in1, in2, in3, in4, in5, in6, in7, in8, in9, in10
   , at1, at2, at3, at4, at5, at6, at7, at8, at9, at10
   , Coproduct1, Coproduct2, Coproduct3, Coproduct4, Coproduct5, Coproduct6, Coproduct7, Coproduct8, Coproduct9, Coproduct10
-  , either1, either2, either3, either4, either5, either6, either7, either8, either9, either10
+  , coproduct1, coproduct2, coproduct3, coproduct4, coproduct5, coproduct6, coproduct7, coproduct8, coproduct9, coproduct10
   , C2, C3, C4, C5, C6, C7, C8, C9, C10, C11
   )
    where
@@ -116,20 +116,20 @@ at10 b f y = case y of
   Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Right (Coproduct (Left r))))))))))))))))))) -> f r
   _ -> b
 
-either1 :: forall a. Coproduct1 a ~> a
-either1 y = case y of
+coproduct1 :: forall a. Coproduct1 a ~> a
+coproduct1 y = case y of
   Coproduct (Left r) -> r
   Coproduct (Right _1) -> absurd (unwrap _1)
 
-either2 :: forall r x a b. (a x -> r) -> (b x -> r) -> Coproduct2 a b x -> r
-either2 a b y = case y of
+coproduct2 :: forall r x a b. (a x -> r) -> (b x -> r) -> Coproduct2 a b x -> r
+coproduct2 a b y = case y of
   Coproduct (Left r) -> a r
   Coproduct (Right _1) -> case _1 of
     Coproduct (Left r) -> b r
     Coproduct (Right _2) -> absurd (unwrap _2)
 
-either3 :: forall r x a b c. (a x -> r) -> (b x -> r) -> (c x -> r) -> Coproduct3 a b c x -> r
-either3 a b c y = case y of
+coproduct3 :: forall r x a b c. (a x -> r) -> (b x -> r) -> (c x -> r) -> Coproduct3 a b c x -> r
+coproduct3 a b c y = case y of
   Coproduct (Left r) -> a r
   Coproduct (Right _1) -> case _1 of
     Coproduct (Left r) -> b r
@@ -137,8 +137,8 @@ either3 a b c y = case y of
       Coproduct (Left r) -> c r
       Coproduct (Right _3) -> absurd (unwrap _3)
 
-either4 :: forall r x a b c d. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> Coproduct4 a b c d x -> r
-either4 a b c d y = case y of
+coproduct4 :: forall r x a b c d. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> Coproduct4 a b c d x -> r
+coproduct4 a b c d y = case y of
   Coproduct (Left r) -> a r
   Coproduct (Right _1) -> case _1 of
     Coproduct (Left r) -> b r
@@ -148,8 +148,8 @@ either4 a b c d y = case y of
         Coproduct (Left r) -> d r
         Coproduct (Right _4) -> absurd (unwrap _4)
 
-either5 :: forall r x a b c d e. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> Coproduct5 a b c d e x -> r
-either5 a b c d e y = case y of
+coproduct5 :: forall r x a b c d e. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> Coproduct5 a b c d e x -> r
+coproduct5 a b c d e y = case y of
   Coproduct (Left r) -> a r
   Coproduct (Right _1) -> case _1 of
     Coproduct (Left r) -> b r
@@ -161,8 +161,8 @@ either5 a b c d e y = case y of
           Coproduct (Left r) -> e r
           Coproduct (Right _5) -> absurd (unwrap _5)
 
-either6 :: forall r x a b c d e f. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> Coproduct6 a b c d e f x -> r
-either6 a b c d e f y = case y of
+coproduct6 :: forall r x a b c d e f. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> Coproduct6 a b c d e f x -> r
+coproduct6 a b c d e f y = case y of
   Coproduct (Left r) -> a r
   Coproduct (Right _1) -> case _1 of
     Coproduct (Left r) -> b r
@@ -176,8 +176,8 @@ either6 a b c d e f y = case y of
             Coproduct (Left r) -> f r
             Coproduct (Right _6) -> absurd (unwrap _6)
 
-either7 :: forall r x a b c d e f g. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> (g x -> r) -> Coproduct7 a b c d e f g x -> r
-either7 a b c d e f g y = case y of
+coproduct7 :: forall r x a b c d e f g. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> (g x -> r) -> Coproduct7 a b c d e f g x -> r
+coproduct7 a b c d e f g y = case y of
   Coproduct (Left r) -> a r
   Coproduct (Right _1) -> case _1 of
     Coproduct (Left r) -> b r
@@ -193,8 +193,8 @@ either7 a b c d e f g y = case y of
               Coproduct (Left r) -> g r
               Coproduct (Right _7) -> absurd (unwrap _7)
 
-either8 :: forall r x a b c d e f g h. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> (g x -> r) -> (h x -> r) -> Coproduct8 a b c d e f g h x -> r
-either8 a b c d e f g h y = case y of
+coproduct8 :: forall r x a b c d e f g h. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> (g x -> r) -> (h x -> r) -> Coproduct8 a b c d e f g h x -> r
+coproduct8 a b c d e f g h y = case y of
   Coproduct (Left r) -> a r
   Coproduct (Right _1) -> case _1 of
     Coproduct (Left r) -> b r
@@ -212,8 +212,8 @@ either8 a b c d e f g h y = case y of
                 Coproduct (Left r) -> h r
                 Coproduct (Right _8) -> absurd (unwrap _8)
 
-either9 :: forall r x a b c d e f g h i. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> (g x -> r) -> (h x -> r) -> (i x -> r) -> Coproduct9 a b c d e f g h i x -> r
-either9 a b c d e f g h i y = case y of
+coproduct9 :: forall r x a b c d e f g h i. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> (g x -> r) -> (h x -> r) -> (i x -> r) -> Coproduct9 a b c d e f g h i x -> r
+coproduct9 a b c d e f g h i y = case y of
   Coproduct (Left r) -> a r
   Coproduct (Right _1) -> case _1 of
     Coproduct (Left r) -> b r
@@ -233,8 +233,8 @@ either9 a b c d e f g h i y = case y of
                   Coproduct (Left r) -> i r
                   Coproduct (Right _9) -> absurd (unwrap _9)
 
-either10 :: forall r x a b c d e f g h i j. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> (g x -> r) -> (h x -> r) -> (i x -> r) -> (j x -> r) -> Coproduct10 a b c d e f g h i j x -> r
-either10 a b c d e f g h i j y = case y of
+coproduct10 :: forall r x a b c d e f g h i j. (a x -> r) -> (b x -> r) -> (c x -> r) -> (d x -> r) -> (e x -> r) -> (f x -> r) -> (g x -> r) -> (h x -> r) -> (i x -> r) -> (j x -> r) -> Coproduct10 a b c d e f g h i j x -> r
+coproduct10 a b c d e f g h i j y = case y of
   Coproduct (Left r) -> a r
   Coproduct (Right _1) -> case _1 of
     Coproduct (Left r) -> b r
